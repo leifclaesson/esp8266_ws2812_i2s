@@ -18,7 +18,9 @@
 #include <stdint.h>
 #include "ws2812_i2s.h"
 #include "../include/ws2812_defs.h"
+#if WS2812_GAMMA_CORRECTION
 #include "../include/ws2812_gamma.h"
+#endif
 
 // include C-style header
 extern "C"
@@ -27,20 +29,20 @@ extern "C"
 };
 
 // class constructor
-WS2812::WS2812(void)
+WS2812_I2S::WS2812_I2S(void)
 {
   // empty for now
 }
   
 // class de-constructor
-WS2812::~WS2812(void)
+WS2812_I2S::~WS2812_I2S(void)
 { 
   // empty for now
   // TODO : should implement switching of DMA
 }
 
 // Init led-string / memory buffers etc.
-void WS2812::init(uint16_t _num_leds)
+void WS2812_I2S::init(uint16_t _num_leds)
 {
   uint8_t i;
   uint16_t j;
@@ -130,7 +132,7 @@ static const uint16_t bitpatterns[16] =
 };
 
 // display the pixels
-void WS2812::show(Pixel_t *pixels)
+void WS2812_I2S::show(Pixel_t *pixels)
 {
   uint8_t *buffer;
   uint8_t pixelbyte;
@@ -158,7 +160,11 @@ void WS2812::show(Pixel_t *pixels)
 
     for(i=0; i<WS2812_DITHER_NUM; i++)
     {
+#if WS2812_GAMMA_CORRECTION
       gammabyte = gamma_dither[i][pixelbyte];
+#else
+      gammabyte = pixelbyte;
+#endif
       *(i2s_ptr[i]++) = bitpatterns[ (gammabyte & 0x0f) ];
       *(i2s_ptr[i]++) = bitpatterns[ (gammabyte>>4) & 0x0f ];
     }

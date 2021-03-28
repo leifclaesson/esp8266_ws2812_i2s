@@ -20,11 +20,11 @@ typedef struct
 } Pixel_t;
 
 
-class WS2812 
+class WS2812_I2S
 {
   public:
-    WS2812(void);
-    ~WS2812(void);
+	WS2812_I2S(void);
+    ~WS2812_I2S(void);
     void init(uint16_t num_leds);
     void show(Pixel_t *);
 

@@ -6,7 +6,7 @@
 #include "../include/ws2812_gamma.h"
 
 // TODO : use pre-processor to map in/out gamma sections depending on WS2812_DITHER_NUM
-
+/*
 static const uint8_t  gamma0[] = {
      0,   0,   1,   1,   1,   1,   1,   1,   1,   1,   1,   1,   1,   1,   1,   1,
      2,   2,   2,   2,   2,   2,   2,   3,   3,   3,   3,   3,   4,   4,   4,   4,
@@ -153,5 +153,5 @@ static const uint8_t  gamma7[] = {
 
 
 const uint8_t *gamma_dither[WS2812_DITHER_NUM] = {gamma0,gamma1,gamma2,gamma3,gamma4,gamma5,gamma6,gamma7};
-
+*/
 // end of file
